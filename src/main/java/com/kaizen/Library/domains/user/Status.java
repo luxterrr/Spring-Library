@@ -1,4 +1,4 @@
-package com.kaizen.Library.user;
+package com.kaizen.Library.domains.user;
 
 public enum Status {
     ACTIVE,
