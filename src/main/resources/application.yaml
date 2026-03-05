@@ -1,33 +1,30 @@
 spring:
   datasource:
-    # 1. Mudamos de 'mem' para 'file' e definimos um caminho (ex: ./data/meubanco)
-    url: jdbc:h2:file:./data/testeste
+    url: jdbc:h2:file:./data/livrariateste
     driver-class-name: org.h2.Driver
     username: saas
     password:
 
-  spring:
-    mail:
-      host: smtp.gmail.com
-      port: 587
-      username: ${lucas.ribas@sghost.com.br}
-      password: teste
-      properties:
-        mail:
-          smtp:
-            auth: true
-            starttls:
-              enable: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: lucascordeiroribas11@gmail.com
+    password: ${SENHAEMAIL2FATORES}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
 
   h2:
     console:
       enabled: true
-      # 2. Caminho do console (opcional, padrão é /h2-console)
       path: /h2-console
 
   jpa:
     hibernate:
-      # 3. Garante que ele não apague as tabelas ao iniciar
       ddl-auto: update
     show-sql: true
     properties:

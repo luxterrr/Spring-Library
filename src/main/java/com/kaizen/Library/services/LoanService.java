@@ -13,6 +13,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -31,11 +32,13 @@ public class LoanService {
 
     @Autowired
     private UserRepository userRepository;
+
     @Autowired
     private EmailService emailService;
 
-    //@Autowired
-   // private RestTemplate restTemplate;
+    public LoanService(EmailService emailService) {
+        this.emailService = emailService;
+    }
 
     public Loan createLoan(LoanDTO loan)throws Exception {
         User client = this.userService.findUserbyId(loan.clientId());
@@ -108,7 +111,7 @@ public class LoanService {
                 client.setStatusUser(StatusUser.INACTIVE);
                 userRepository.save(client);
 
-                emailService.sendEmail(client.getEmail(), "THE TERM OF THE BOOK" + loan.getItem().getTitle() +  "EXPIRED", "THE TERM WAS AT " + loan.getDeadline() + "YOUR STUPID BTCH");
+                emailService.sendEmail(client.getEmail(), "THE TERM OF THE BOOK EXPIRED", "THE TERM WAS AT " + loan.getDeadline() + "YOUR STUPID BTCH");
             }
         }
     }

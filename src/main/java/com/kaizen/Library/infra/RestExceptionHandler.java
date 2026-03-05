@@ -16,11 +16,4 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         ExceptionDTO exceptionDTO = new ExceptionDTO(exception.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exceptionDTO);
     }
-
-//    @ExceptionHandler(Exception.class)
-//    public ResponseEntity ClientNotFound () {
-//        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("CLIENT NOT FOUND");
-//    }
-
-
 }
