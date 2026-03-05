@@ -1,0 +1,6 @@
+2026-03-04 17:27:05.953039-03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TB_BOOK" not found (this database is empty); SQL statement:
+select b1_0.code,b1_0.author,b1_0.category,b1_0.quantity,b1_0.title from tb_book b1_0 [42104-240]
+2026-03-04 17:27:33.862197-03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TB_BOOK" not found (this database is empty); SQL statement:
+insert into tb_book (author,category,quantity,title,code) values (?,?,?,?,default) [42104-240]
