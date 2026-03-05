@@ -19,10 +19,15 @@ public class User {
     private Long id;
 
     private String name;
-    private Status status;
+    private StatusUser statusUser;
+    private boolean onLoan;
+
+    //@Column(unique = true)
+    private String email;
 
     public User(UserDTO data) {
         this.name = data.name();
-        this.status = data.status();
+        this.statusUser= StatusUser.ACTIVE;
+        this.email = data.email();
     }
 }

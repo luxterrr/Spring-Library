@@ -1,14 +1,12 @@
 package com.kaizen.Library.services;
 
 import com.kaizen.Library.DTOS.UserDTO;
-import com.kaizen.Library.domains.user.Status;
+import com.kaizen.Library.domains.user.StatusUser;
 import com.kaizen.Library.repositories.UserRepository;
 import com.kaizen.Library.domains.user.User;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.List;
 
 @Service
@@ -18,13 +16,10 @@ public class UserService {
     private UserRepository userRepository;
 
     public boolean validateUser(User client) {
-        if (client.getStatus() == Status.INACTIVE) {
+        if (client.getStatusUser() == StatusUser.INACTIVE || client.isOnLoan()) {
             return false;
         }else return true;
 
-        //if (item.getQuantity() <= 0){
-         //   throw new Exception("QUANTIDADE DO LIVRO EM FALTA");
-        //}
     }
 
     public User createUser(UserDTO client){

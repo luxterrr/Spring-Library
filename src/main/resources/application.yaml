@@ -1,10 +1,23 @@
 spring:
   datasource:
     # 1. Mudamos de 'mem' para 'file' e definimos um caminho (ex: ./data/meubanco)
-    url: jdbc:h2:file:./data/teste
+    url: jdbc:h2:file:./data/testeste
     driver-class-name: org.h2.Driver
     username: saas
     password:
+
+  spring:
+    mail:
+      host: smtp.gmail.com
+      port: 587
+      username: ${lucas.ribas@sghost.com.br}
+      password: teste
+      properties:
+        mail:
+          smtp:
+            auth: true
+            starttls:
+              enable: true
 
   h2:
     console:

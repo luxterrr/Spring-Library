@@ -1,6 +1,7 @@
 package com.kaizen.Library.domains.loan;
 
-public enum Status {
+public enum StatusLoan {
     RETURNED,
-    PENDENT
+    PENDENT,
+    LATE
 }

@@ -12,7 +12,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ExceptionDTO> EntityNotFoundException (Exception exception) {
+    public ResponseEntity<ExceptionDTO> handleGenericException (Exception exception) {
         ExceptionDTO exceptionDTO = new ExceptionDTO(exception.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exceptionDTO);
     }

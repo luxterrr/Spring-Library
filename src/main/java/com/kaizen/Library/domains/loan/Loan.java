@@ -31,5 +31,6 @@ public class Loan {
     private Book item;
 
     private LocalDateTime timestamp;
-    private Status status;
+    private LocalDateTime deadline;
+    private StatusLoan statusLoan;
 }

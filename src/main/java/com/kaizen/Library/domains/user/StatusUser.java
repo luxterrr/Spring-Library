@@ -1,6 +1,6 @@
 package com.kaizen.Library.domains.user;
 
-public enum Status {
+public enum StatusUser {
     ACTIVE,
     INACTIVE
 }

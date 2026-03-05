@@ -1,6 +1,7 @@
 package com.kaizen.Library.controllers;
 
 import com.kaizen.Library.DTOS.UserDTO;
+import com.kaizen.Library.domains.user.StatusUser;
 import com.kaizen.Library.domains.user.User;
 import com.kaizen.Library.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,10 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public ResponseEntity<User, String> createUser(@RequestBody UserDTO user) {
+    public ResponseEntity<User> createUser(@RequestBody UserDTO user) {
         User newUser = userService.createUser(user);
+        newUser.setStatusUser(StatusUser.ACTIVE);
+        newUser.setOnLoan(false);
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 

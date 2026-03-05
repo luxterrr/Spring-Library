@@ -1,4 +1,3 @@
 package com.kaizen.Library.DTOS;
 
-public record ExceptionDTO(String message) {
-}
+public record ExceptionDTO(String message) { }
