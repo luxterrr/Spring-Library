@@ -1,6 +1,6 @@
 package com.kaizen.Library.controllers;
 
-import com.kaizen.Library.DTO.LoanDTO;
+import com.kaizen.Library.DTOS.LoanDTO;
 import com.kaizen.Library.domains.loan.Loan;
 import com.kaizen.Library.services.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,10 +29,9 @@ public class LoanController {
         return new ResponseEntity<>(loans, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> returnLoan(@PathVariable Long id) {
+    @PatchMapping("/{id}/return")
+    public ResponseEntity<String> returnLoan(@PathVariable Long id) throws Exception {
         loanService.returnLoan(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok("BOOK RETURNED");
     }
-
 }

@@ -1,13 +1,13 @@
 package com.kaizen.Library.services;
 
-import com.kaizen.Library.DTO.BookDTO;
+import com.kaizen.Library.DTOS.BookDTO;
 import com.kaizen.Library.domains.book.Book;
 import com.kaizen.Library.repositories.BookRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class BookService {
@@ -15,14 +15,14 @@ public class BookService {
     @Autowired
     public BookRepository bookRepository;
 
-    public boolean validateBook(Book item)throws Exception{
+    public boolean validateBook(Book item) {
         if (item.getQuantity() <= 0){
             return false;
         }else return true;
     }
 
-    public Book findBookByCode(Long code) throws Exception{
-        return this.bookRepository.findBookByCode(code).orElseThrow(() -> new Exception("LIVRO NAO ENCONTRADO"));
+    public Book findBookByCode(Long code) throws Exception {
+        return this.bookRepository.findBookByCode(code).orElseThrow(() -> new EntityNotFoundException("BOOK NOT FOUND"));
     }
 
     public Book createBook(BookDTO item) {

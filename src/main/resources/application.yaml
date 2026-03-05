@@ -1,7 +1,7 @@
 spring:
   datasource:
     # 1. Mudamos de 'mem' para 'file' e definimos um caminho (ex: ./data/meubanco)
-    url: jdbc:h2:file:./data/meubanco1
+    url: jdbc:h2:file:./data/teste
     driver-class-name: org.h2.Driver
     username: saas
     password:

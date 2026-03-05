@@ -1,6 +1,6 @@
 package com.kaizen.Library.domains.user;
 
-import com.kaizen.Library.DTO.UserDTO;
+import com.kaizen.Library.DTOS.UserDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,7 +21,7 @@ public class User {
     private String name;
     private Status status;
 
-    public User(UserDTO data){
+    public User(UserDTO data) {
         this.name = data.name();
         this.status = data.status();
     }

@@ -26,10 +26,10 @@ public class Loan {
     @JoinColumn(name = "client_id")
     private User client;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "item_id")
     private Book item;
 
     private LocalDateTime timestamp;
-
+    private Status status;
 }

@@ -1,4 +1,4 @@
-package com.kaizen.Library.DTO;
+package com.kaizen.Library.DTOS;
 
 import com.kaizen.Library.domains.user.Status;
 

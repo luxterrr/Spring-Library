@@ -1,6 +1,6 @@
 package com.kaizen.Library.domains.book;
 
-import com.kaizen.Library.DTO.BookDTO;
+import com.kaizen.Library.DTOS.BookDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,7 +23,7 @@ public class Book {
     private String category;
     private Integer quantity;
 
-    public Book(BookDTO livro){
+    public Book(BookDTO livro) {
         this.author = livro.author();
         this.category = livro.category();
         this.title = livro.title();
