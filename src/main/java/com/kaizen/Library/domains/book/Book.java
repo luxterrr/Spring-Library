@@ -20,13 +20,11 @@ public class Book {
 
     private String author;
     private String title;
-    private String category;
-    private Integer quantity;
+    private Integer volumes;
 
-    public Book(BookDTO livro) {
-        this.author = livro.author();
-        this.category = livro.category();
-        this.title = livro.title();
-        this.quantity = livro.quantity();
+    public Book(BookDTO book) {
+        this.author = book.author();
+        this.title = book.title();
+        this.volumes = book.volumes();
     }
 }

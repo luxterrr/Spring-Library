@@ -1,6 +1,5 @@
 package com.kaizen.Library.domains.loan;
 
-
 import com.kaizen.Library.domains.book.Book;
 import com.kaizen.Library.domains.user.User;
 import jakarta.persistence.*;
@@ -33,4 +32,6 @@ public class Loan {
     private LocalDateTime timestamp;
     private LocalDateTime deadline;
     private StatusLoan statusLoan;
+
+
 }

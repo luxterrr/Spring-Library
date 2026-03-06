@@ -57,10 +57,10 @@ public class LoanService {
         newLoan.setClient(client);
         newLoan.setItem(item);
         newLoan.setTimestamp(LocalDateTime.now());
-        newLoan.setDeadline(LocalDateTime.now().plusMinutes(1));
+        newLoan.setDeadline(LocalDateTime.now().plusMinutes(2));
         newLoan.setStatusLoan(StatusLoan.PENDENT);
 
-        item.setQuantity(item.getQuantity() - 1);
+        item.setVolumes(item.getVolumes() - 1);
         client.setOnLoan(true);
 
         this.loanRepository.save(newLoan);
@@ -68,8 +68,8 @@ public class LoanService {
         this.bookService.saveBook(item);
 
         String deadLineStr = newLoan.getDeadline().format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-        emailService.sendEmail(newLoan.getClient().getEmail(), "LOAN OF THE BOOK" + item.getTitle() +  "WAS CONFIRMED",
-                "HELLO, YOUR LOAN WAS REALIZED. TERM TO RETURN " + deadLineStr);
+        emailService.sendEmail(newLoan.getClient().getEmail(), "LOAN OF THE BOOK " + item.getTitle() + "\nAUTHOR: " + item.getAuthor() + " WAS CONFIRMED",
+                "HELLO, YOUR LOAN WAS REALIZED. TERM TO RETURN: " + deadLineStr);
 
         return newLoan;
     }
@@ -85,7 +85,7 @@ public class LoanService {
         Book book = loan.getItem();
         User client = loan.getClient();
 
-        book.setQuantity(book.getQuantity() + 1);
+        book.setVolumes(book.getVolumes() + 1);
 
         client.setStatusUser(StatusUser.ACTIVE);
 
@@ -94,7 +94,7 @@ public class LoanService {
         emailService.sendEmail(client.getEmail(), "RETURNED CONFIRMED", "THE BOOK WAS RETURNED, TY <3");
     }
 
-    @Scheduled(fixedRate = 1000)
+    @Scheduled(fixedRate = 100000)
     public void checkLateLoans () {
         LocalDateTime now = LocalDateTime.now();
 
@@ -102,7 +102,6 @@ public class LoanService {
 
         for (Loan loan : pendentLoans) {
             if (loan.getDeadline().isBefore(now)) {
-                System.out.println("LOAN ID" + loan.getId() + "IS LATE");
 
                 loan.setStatusLoan(StatusLoan.LATE);
                 loanRepository.save(loan);
@@ -111,7 +110,7 @@ public class LoanService {
                 client.setStatusUser(StatusUser.INACTIVE);
                 userRepository.save(client);
 
-                emailService.sendEmail(client.getEmail(), "THE TERM OF THE BOOK EXPIRED", "THE TERM WAS AT " + loan.getDeadline() + "YOUR STUPID BTCH");
+                emailService.sendEmail(client.getEmail(), "THE TERM OF THE BOOK EXPIRED", "THE TERM WAS AT " + loan.getDeadline() + " YOUR STUPID BTCH");
             }
         }
     }

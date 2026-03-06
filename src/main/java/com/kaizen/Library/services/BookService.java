@@ -16,7 +16,7 @@ public class BookService {
     public BookRepository bookRepository;
 
     public boolean validateBook(Book item) {
-        if (item.getQuantity() <= 0){
+        if (item.getVolumes() <= 0){
             return false;
         }else return true;
     }
@@ -32,7 +32,9 @@ public class BookService {
     }
 
     public List<Book> getAllBooks() {return bookRepository.findAll();}
-    public void saveBook(Book book) {this.bookRepository.save(book);}
+    public Book saveBook(Book book) {
+        return bookRepository.save(book);
+    }
 
     public void deleteBook(Long code) {
         bookRepository.deleteById(code);
