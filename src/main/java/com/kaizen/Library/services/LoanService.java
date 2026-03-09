@@ -88,6 +88,7 @@ public class LoanService {
         book.setVolumes(book.getVolumes() + 1);
 
         client.setStatusUser(StatusUser.ACTIVE);
+        client.setOnLoan(false);
 
         loan.setStatusLoan(StatusLoan.RETURNED);
 

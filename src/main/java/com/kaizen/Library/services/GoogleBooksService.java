@@ -1,8 +1,7 @@
 package com.kaizen.Library.services;
 
-import com.kaizen.Library.domains.book.Book;
-import com.kaizen.Library.domains.googlebook.GoogleBooksResponse;
-import com.kaizen.Library.domains.googlebook.VolumeInfo;
+import com.kaizen.Library.DTOS.BookDTO;
+import com.kaizen.Library.DTOS.GoogleBookDTO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -20,15 +19,20 @@ public class GoogleBooksService {
         this.restTemplate = restTemplate;
     }
 
-    public Book importByIsbn(String isbn) {
+    public BookDTO importByIsbn(String isbn, BookDTO item) {
         String url = API_URL + isbn + "&key=" + apiKey;
         System.out.println(url);
-        GoogleBooksResponse response = restTemplate.getForObject(url, GoogleBooksResponse.class);
+        GoogleBookDTO response = restTemplate.getForObject(url, GoogleBookDTO.class);
 
-
-        if (response != null && response.getGoogleBookItems() != null && !response.getGoogleBookItems().isEmpty()) {
-            return response.getGoogleBookItems().getFirst().getBook();
+        if (response == null && response.items() == null && response.items().isEmpty()) {
+            return null;
         }
-        return null;
+        GoogleBookDTO.Item info = response.items().getFirst();
+
+        String title = info.volumeInfo().title();
+        String author = String.valueOf(info.volumeInfo().authors());
+        String category = info.volumeInfo().mainCategory();
+
+        return new BookDTO(author, title, category, 1);
     }
 }

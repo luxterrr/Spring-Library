@@ -2,7 +2,6 @@ package com.kaizen.Library.controllers;
 
 import com.kaizen.Library.DTOS.BookDTO;
 import com.kaizen.Library.domains.book.Book;
-import com.kaizen.Library.domains.googlebook.VolumeInfo;
 import com.kaizen.Library.services.BookService;
 import com.kaizen.Library.services.GoogleBooksService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,21 +40,8 @@ public class BookController {
     }
 
     @PostMapping("/external/{isbn}")
-    public ResponseEntity<Book> addExternalBook (@PathVariable String isbn) {
-        Book info = googleBooksService.importByIsbn(isbn);
-
-        if (info == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        Book newBook = new Book();
-        newBook.setTitle(info.getTitle());
-
-        if (info.getAuthor() != null && ! info.getAuthor().isEmpty()) {
-            newBook.setAuthor(String.join(", ", info.getAuthor()));
-        }
-
-        Book savedBook = bookService.saveBook(newBook);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedBook);
+    public ResponseEntity<Book> addExternalBook (@PathVariable String isbn, BookDTO book) {
+        Book newBook = bookService.createBook(googleBooksService.importByIsbn(isbn, book));
+        return new ResponseEntity<>(newBook, HttpStatus.CREATED);
     }
 }
